@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Postage Calculator</string>
+    <string name="menu_settings">Settings</string>
+    
+    <string name="radio_instructions">Select a Package Type</string>
+    <string name="radio_letter">Letter</string>
+    <string name="radio_large_envelope">Large Envelope</string>
+    <string name="radio_package">Package</string>
+    
+    <string name="weight_instructions">Enter Your Package Weight</string>
+    <string name="weight_field">0 &#8211; 13 oz</string>
+    
+    <string name="calculate_button">Calculate</string>
+    
+    <string name="N_A">N/A</string>
+    
+    <style
+		name="Theme_Dialog_Translucent"
+		parent="android:Theme.Dialog">
+		<item name="android:windowBackground">@null</item>
+	</style>
+    
+</resources>

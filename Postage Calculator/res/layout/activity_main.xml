@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+    	<!-- android:background="@color/red"-->
+
+    <RadioGroup
+        android:id="@+id/PackageType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioInstructions"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" >
+
+        <RadioButton
+            android:id="@+id/Letter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/radio_letter" />
+
+        <RadioButton
+            android:id="@+id/LargeEnvelope"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_large_envelope" />
+
+        <RadioButton
+            android:id="@+id/Package"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_package" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/weightField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/weightInstructions"
+        android:layout_alignRight="@+id/weightInstructions"
+        android:layout_below="@+id/weightInstructions"
+        android:layout_marginTop="24dp"
+        android:ems="20"
+        android:hint="@string/weight_field"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/weightInstructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/weight_instructions"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/calculateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/radioInstructions"
+        android:layout_below="@+id/weightField"
+        android:layout_marginTop="38dp"
+        android:text="@string/calculate_button" />
+
+    <TextView
+        android:id="@+id/resultField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/calculateButton"
+        android:layout_alignBottom="@+id/calculateButton"
+        android:layout_alignRight="@+id/radioInstructions"
+        android:layout_marginRight="32dp"
+        android:text="@string/N_A"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+   <TabWidget
+        android:id="@android:id/tabs"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+   <FrameLayout
+        android:id="@android:id/tabcontent"
+        android:layout_width="fill_parent"/>
+
+   <TextView
+       android:id="@+id/radioInstructions"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_below="@android:id/tabs"
+       android:layout_centerHorizontal="true"
+       android:layout_marginTop="20dp"
+       android:text="@string/radio_instructions"
+       android:textAppearance="?android:attr/textAppearanceLarge" />
+   
+   
+
+</RelativeLayout>
