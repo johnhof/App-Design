@@ -16,10 +16,6 @@
     
     <string name="N_A">N/A</string>
     
-    <style
-		name="Theme_Dialog_Translucent"
-		parent="android:Theme.Dialog">
-		<item name="android:windowBackground">@null</item>
-	</style>
+    <string name="landscape_instructions">Select a Package Type and Enter Weight</string>
     
 </resources>

@@ -1,0 +1,76 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+    	<!-- android:background="@color/red"-->
+
+   <EditText
+       android:id="@+id/weightField"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignLeft="@+id/calculateButton"
+       android:layout_alignRight="@+id/landscapeinstructions"
+       android:layout_alignTop="@+id/PackageType"
+       android:ems="20"
+       android:hint="@string/weight_field"
+       android:inputType="numberDecimal" />
+
+   <TextView
+       android:id="@+id/resultField"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignBaseline="@+id/calculateButton"
+       android:layout_alignBottom="@+id/calculateButton"
+       android:layout_alignRight="@+id/weightField"
+       android:text="@string/N_A"
+       android:textAppearance="?android:attr/textAppearanceLarge" />
+
+   <Button
+       android:id="@+id/calculateButton"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignBottom="@+id/PackageType"
+       android:layout_marginLeft="74dp"
+       android:layout_toRightOf="@+id/PackageType"
+       android:text="@string/calculate_button" />
+
+   <TextView
+       android:id="@+id/landscapeinstructions"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentTop="true"
+       android:layout_centerHorizontal="true"
+       android:layout_marginTop="46dp"
+       android:text="@string/landscape_instructions"
+       android:textAppearance="?android:attr/textAppearanceLarge" />
+
+   <RadioGroup
+       android:id="@+id/PackageType"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignLeft="@+id/landscapeinstructions"
+       android:layout_below="@+id/landscapeinstructions"
+       android:layout_marginTop="30dp" >
+
+       <RadioButton
+           android:id="@+id/Letter"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:checked="true"
+           android:text="@string/radio_letter" />
+
+       <RadioButton
+           android:id="@+id/LargeEnvelope"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/radio_large_envelope" />
+
+       <RadioButton
+           android:id="@+id/Package"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/radio_package" />
+   </RadioGroup>
+
+</RelativeLayout>
