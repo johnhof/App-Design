@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+    
+    <edu.pitt.cs1635.jmh162.prog2.PaintCanvas
+        android:id="@+id/paint_canvas"
+        android:layout_width="fill_parent"
+        android:layout_height="350"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"/>
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/submit_button" />
+
+</RelativeLayout>
