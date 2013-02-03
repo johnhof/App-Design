@@ -5,7 +5,15 @@
     <string name="menu_settings">Settings</string>
     <string name="submit_button">Submit Letter</string>
     <string name="add_button">add Letter</string>
-    <string name="result_text">Waiting...</string>
+    <string name="result_text">Waiting&#8230;</string>
+    <string name="note_text">Note Text&#8230;</string>
+    <string name="options_button">Options</string>
+    <string name="clear_note_button">Clear Note</string>
+    <string name="clear_canvas_button">Clear Canvas</string>
+    
+    <string name="text_field_color">#DADAE6</string>
+    <string name="separator_color">#FFFFFF</string>
+    
     
     
 
