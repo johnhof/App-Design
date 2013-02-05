@@ -14,11 +14,11 @@
     <string name="title_activity_color_picker">Color Selection</string>
     <string name="color_instructions">Select a Color</string>
     <string name="red">Red</string>
-    <string name="orange">Orange</string>
+    <string name="cyan">Cyan</string>
     <string name="yellow">Yellow</string>
     <string name="green">Green</string>
     <string name="blue">Blue</string>
-    <string name="indigo">Indigo</string>
+    <string name="magenta">Magenta</string>
     <string name="violet">Violet</string>
     <string name="black">Black</string>
     <string name="color_done">Done</string>

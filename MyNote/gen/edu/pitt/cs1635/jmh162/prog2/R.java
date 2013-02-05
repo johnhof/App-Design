@@ -17,25 +17,25 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int black_radio=0x7f080006;
-        public static final int blue_radio=0x7f080009;
+        public static final int black_radio=0x7f080005;
+        public static final int blue_radio=0x7f080008;
         public static final int clear_canvas_button=0x7f08000d;
         public static final int color_button=0x7f08000c;
+        public static final int color_group=0x7f080002;
+        public static final int cyan_radio=0x7f08000a;
         public static final int done_button=0x7f080000;
-        public static final int green_radio=0x7f080004;
-        public static final int indigo_radio=0x7f080005;
+        public static final int green_radio=0x7f080003;
         public static final int instruction_text=0x7f080001;
+        public static final int magenta_radio=0x7f080004;
         public static final int menu_settings=0x7f080012;
-        public static final int orange_radio=0x7f080003;
         public static final int paint_view=0x7f08000b;
-        public static final int radioGroup1=0x7f080002;
-        public static final int red_radio=0x7f080007;
+        public static final int red_radio=0x7f080006;
         public static final int result_text=0x7f08000e;
         public static final int separator=0x7f080010;
         public static final int separator2=0x7f080011;
         public static final int submit_button=0x7f08000f;
-        public static final int violet_radio=0x7f08000a;
-        public static final int yellow_radio=0x7f080008;
+        public static final int violet_radio=0x7f080009;
+        public static final int yellow_radio=0x7f080007;
     }
     public static final class layout {
         public static final int activity_color_picker=0x7f030000;
@@ -55,11 +55,11 @@ public final class R {
         public static final int color_button=0x7f050006;
         public static final int color_done=0x7f050013;
         public static final int color_instructions=0x7f05000a;
+        public static final int cyan=0x7f05000c;
         public static final int green=0x7f05000e;
-        public static final int indigo=0x7f050010;
+        public static final int magenta=0x7f050010;
         public static final int menu_settings=0x7f050001;
         public static final int note_text=0x7f050005;
-        public static final int orange=0x7f05000c;
         public static final int red=0x7f05000b;
         public static final int result_text=0x7f050004;
         public static final int submit_button=0x7f050002;

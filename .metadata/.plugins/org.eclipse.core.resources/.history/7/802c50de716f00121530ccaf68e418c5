@@ -1,0 +1,70 @@
+package edu.pitt.cs1635.jmh162.prog2;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
+public class ColorPicker extends Activity {
+	private Button b_done;
+	private RadioGroup r_colors;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_color_picker);
+
+		//initialize local objects
+		initializeUIObjects();
+		initializeButtonListeners();
+	}
+	
+	public void initializeUIObjects()
+	{
+		//initialize buttons
+		b_done = (Button) findViewById(R.id.done_button);
+		r_colors = (RadioGroup) findViewById(R.id.color_button);
+		
+		//initialize text field
+		tv_resultText = (TextView) findViewById(R.id.result_text);
+		
+		//initialize canvas
+		paintView = (PaintView) findViewById(R.id.paint_view);		
+	}
+	
+	//--------------------------------------------------------------------------------------------------
+	//Button Listeners
+	//--------------------------------------------------------------------------------------------------
+	
+	private void initializeButtonListeners() 
+	{
+		b_clearCanvas.setOnClickListener(new OnClickListener() 
+		{
+			@Override
+			public void onClick(View arg0) 
+			{		
+				paintView.clear();
+			}
+		});		
+		b_color.setOnClickListener(new OnClickListener() 
+		{
+			@Override
+			public void onClick(View arg0) 
+			{		
+				//TODO: open color Selector
+			}
+		});
+		b_submitLetter.setOnClickListener(new OnClickListener() 
+		{
+			@Override
+			public void onClick(View arg0) 
+			{		
+				//TODO: request letters from server
+			}
+		});
+	}
+}

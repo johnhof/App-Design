@@ -15,7 +15,7 @@ import android.view.View.OnTouchListener;
 
 public class PaintView extends View implements OnTouchListener
 {
-	private int color;
+	private static int color;
 	Paint userPaint;
 	Paint clearPaint;
 	public ArrayList<Path> pathList;
@@ -73,6 +73,10 @@ public class PaintView extends View implements OnTouchListener
 				
 		return true;
 	}
+	
+	public static int getColor(){
+		return color;
+	}
 
 	
 	//empty path list and mark canvas invalid
@@ -80,5 +84,9 @@ public class PaintView extends View implements OnTouchListener
 	{
 		pathList = new ArrayList<Path>();
 		invalidate();
+	}
+
+	public void setColor(int newcolor) {
+		color = newcolor;
 	}
 }

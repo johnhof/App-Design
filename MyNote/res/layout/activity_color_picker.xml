@@ -17,13 +17,13 @@
         android:id="@+id/instruction_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/radioGroup1"
+        android:layout_above="@+id/color_group"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="35dp"
         android:text="@string/color_instructions" />
 
     <RadioGroup
-        android:id="@+id/radioGroup1"
+        android:id="@+id/color_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/done_button"
@@ -37,10 +37,10 @@
             android:text="@string/green" />
 
         <RadioButton
-            android:id="@+id/indigo_radio"
+            android:id="@+id/magenta_radio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/indigo" />
+            android:text="@string/magenta" />
 
         <RadioButton
             android:id="@+id/black_radio"
@@ -73,10 +73,10 @@
             android:text="@string/violet" />
 
         <RadioButton
-            android:id="@+id/orange_radio"
+            android:id="@+id/cyan_radio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/orange" />
+            android:text="@string/cyan" />
     </RadioGroup>
 
 </RelativeLayout>

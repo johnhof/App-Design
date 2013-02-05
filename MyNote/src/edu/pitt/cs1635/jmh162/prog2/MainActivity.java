@@ -2,7 +2,8 @@ package edu.pitt.cs1635.jmh162.prog2;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.MotionEvent;
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -59,8 +60,11 @@ public class MainActivity extends Activity {
 		{
 			@Override
 			public void onClick(View arg0) 
-			{		
-				//TODO: open color Selector
+			{	
+				int code = 0;
+				Intent intent = new Intent(MainActivity.this, ColorPicker.class);
+				intent.putExtra("oldColor", ""+PaintView.getColor());
+				startActivityForResult(intent, code);
 			}
 		});
 		b_submitLetter.setOnClickListener(new OnClickListener() 
@@ -70,14 +74,20 @@ public class MainActivity extends Activity {
 			{		
 				//TODO: request letters from server
 			}
-		});/*
-		paintView.setOnTouchListener(new View.OnTouchListener() 
-		{
-			@Override
-			public boolean onTouch(View v, MotionEvent event) 
-			{
-				return paintView.touchHandler(v, event);
-			}
-		});*/
+		});
 	}
+	@Override 
+	public void onActivityResult(int requestCode, int resultCode, Intent data) 
+	{     
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == Activity.RESULT_OK) 
+	    { 
+	        //retrieve color
+			Bundle extras = getIntent().getExtras();
+			if (extras != null) {
+			    String newColorString = extras.getString("color");
+			    paintView.setColor(Integer.parseInt(newColorString));
+			}
+	    }  
+	} 
 }
