@@ -1,0 +1,68 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+
+    <edu.pitt.cs1635.jmh162.prog2.PaintView
+        android:id="@+id/paint_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/options_button"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/clear_canvas_button" />
+
+    <TextView
+        android:id="@+id/result_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/submit_button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/submit_button"
+        android:background="@color/text_field_color"
+        android:gravity="center"
+        android:text="@string/result_text" />
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/submit_button" />
+
+    <Button
+        android:id="@+id/options_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/clear_canvas_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/clear_canvas_button"
+        android:text="@string/options_button" />
+
+    <Button
+        android:id="@+id/clear_canvas_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/submit_button"
+        android:layout_centerHorizontal="true"
+        android:text="@string/clear_canvas_button" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/paint_canvas"
+        android:background="#000000" />
+
+    <View
+        android:id="@+id/separator2"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_alignBottom="@+id/paint_canvas"
+        android:layout_alignParentLeft="true"
+        android:background="#000000" />
+</RelativeLayout>

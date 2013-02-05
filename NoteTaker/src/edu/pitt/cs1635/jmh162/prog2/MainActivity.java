@@ -2,7 +2,7 @@ package edu.pitt.cs1635.jmh162.prog2;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.graphics.Point;
+import android.graphics.Path;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,7 +19,6 @@ public class MainActivity extends Activity implements OnTouchListener{
 	private Button b_options;
 	private Button b_submitLetter;
 	private TextView tv_resultText;	
-	public ArrayList<Point> pointList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -28,8 +27,8 @@ public class MainActivity extends Activity implements OnTouchListener{
 		setContentView(R.layout.activity_main);
 		
 		//initialize local objects
-		initializeUIObjects();
-		initializeButtonListeners();
+		//initializeUIObjects();
+		//initializeButtonListeners();
 	}
 	
 	public void initializeUIObjects()
@@ -65,7 +64,7 @@ public class MainActivity extends Activity implements OnTouchListener{
 			@Override
 			public void onClick(View arg0) 
 			{		
-				
+				//TODO: Clear Canvas
 			}
 		});		
 		b_options.setOnClickListener(new OnClickListener() 
@@ -73,7 +72,7 @@ public class MainActivity extends Activity implements OnTouchListener{
 			@Override
 			public void onClick(View arg0) 
 			{		
-				
+				//TODO: open color Selector
 			}
 		});
 		b_submitLetter.setOnClickListener(new OnClickListener() 
@@ -81,7 +80,7 @@ public class MainActivity extends Activity implements OnTouchListener{
 			@Override
 			public void onClick(View arg0) 
 			{		
-				
+				//TODO: request letters from server
 			}
 		});
 	}
@@ -92,22 +91,20 @@ public class MainActivity extends Activity implements OnTouchListener{
 	@Override
 	public boolean onTouch(View arg0, MotionEvent arg1) 
 	{
-		Point newPoint = new Point();
-		newPoint.setLocation((double)arg1.getX(), (double)arg1.getY());
-		
-		//get the coordinates if the user engaged the canvas
+		/*
 		int action = arg1.getAction();
-		if(action == MotionEvent.ACTION_MOVE || 
-			action == MotionEvent.ACTION_DOWN || 
-			action == MotionEvent.ACTION_UP)
+		//if the event was a down event or add a new path to pathlist
+		if(action == MotionEvent.ACTION_DOWN || canvas.pathList.size()==0)
 		{
-			
-			append();
-			//add points
-			//invalidate 
-			//list of paths to avoid artifacts
+			Path newPath = new Path();
+			newPath.setLastPoint(arg1.getX(), arg1.getY());
+			canvas.pathList.add(newPath);
 		}
-		return false;
+		else if(action == MotionEvent.ACTION_MOVE || action == MotionEvent.ACTION_UP)
+		{
+			canvas.pathList.get(canvas.pathList.size()-1).lineTo(arg1.getX(), arg1.getY());
+		}*/
+		return true;
 	}
 	
 	private void append()

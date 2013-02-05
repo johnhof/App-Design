@@ -59,7 +59,7 @@
         android:background="#000000" />
 
     <View
-        android:id="@+id/separator"
+        android:id="@+id/separator2"
         android:layout_width="fill_parent"
         android:layout_height="1dip"
         android:layout_alignBottom="@+id/paint_canvas"
