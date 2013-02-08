@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -18,7 +19,11 @@ public class PaintView extends View implements OnTouchListener
 	private static int color;
 	Paint userPaint;
 	Paint clearPaint;
-	public ArrayList<Path> pathList;
+	private ArrayList<Path> pathList;
+	private ArrayList<Integer> colorPairs;
+	private String pointString;
+	float viewHeight;
+	float viewWidth;
 	
 	public PaintView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -30,6 +35,7 @@ public class PaintView extends View implements OnTouchListener
 		userPaint = new Paint();
 		clearPaint = new Paint();
 		pathList = new ArrayList<Path>();
+		colorPairs = new ArrayList<Integer>();
 		
 		//initialize paint objects
 		clearPaint.setStyle(Paint.Style.FILL);
@@ -38,6 +44,10 @@ public class PaintView extends View implements OnTouchListener
 		userPaint.setColor(color);
         userPaint.setStrokeWidth(3);
         userPaint.setPathEffect(null);
+        
+        //format the string
+        pointString = "[";
+        
 	}
 	
 	@Override
@@ -47,10 +57,10 @@ public class PaintView extends View implements OnTouchListener
 		
 		//refresh userPaint objects
 		userPaint.setStyle(Paint.Style.STROKE);
-		userPaint.setColor(color);
 		
         for(int i = 0; i < pathList.size(); i++)
         {
+    		userPaint.setColor(colorPairs.get(i));
         	canvas.drawPath(pathList.get(i), userPaint);	
         }
 	}
@@ -63,30 +73,59 @@ public class PaintView extends View implements OnTouchListener
 		{
 			Path newPath = new Path();
 			newPath.setLastPoint(event.getX(), event.getY());
+			append((int)event.getX(), (int)event.getY());
+			//error here
 			pathList.add(newPath);
+			colorPairs.add(color);
 		}
-		if(action == MotionEvent.ACTION_MOVE)
+		else if(action == MotionEvent.ACTION_MOVE)
 		{
 			pathList.get(pathList.size()-1).lineTo(event.getX(), event.getY());
+			append((int)event.getX(), (int)event.getY());
 		}
 		invalidate();
 				
 		return true;
 	}
 	
-	public static int getColor(){
+	public static int getColor()
+	{
 		return color;
 	}
-
 	
 	//empty path list and mark canvas invalid
 	public void clear()
 	{
 		pathList = new ArrayList<Path>();
+		colorPairs = new ArrayList<Integer>();
+		pointString = "[";
 		invalidate();
 	}
 
-	public void setColor(int newcolor) {
+	public void setColor(int newcolor) 
+	{
 		color = newcolor;
+	}
+	
+	public void append(float x, float y)
+	{
+        //get dimensions for point resizing of points
+    	viewHeight = this.getHeight();
+    	viewWidth = this.getWidth();
+		if(pointString.contains(","))pointString+=", ";
+		pointString+=((int)(x*(255.0/viewWidth)));
+		pointString+=", "+((int)(y*(255.0/viewHeight)));
+	}
+	
+	public String getFinalPointString()
+	{
+		//format the end of the string
+		return pointString+", 255, 255]";
+	}
+	
+	public boolean hasPoints()
+	{
+		if(pathList.size()>0) return true;
+		return false;
 	}
 }
