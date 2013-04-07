@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MyTweet</string>
+    <string name="action_settings">Settings</string>
+    
+    <!-- menu -->
+    <string name="menu_home">Home</string>
+    <string name="menu_mentions">Mentions</string>
+    <string name="menu_Post">Post</string>
+    
+    <!-- info -->
+    <string name="info_username">username</string>
+    <string name="info_name">name</string>
+    <string name="info_tweet_number">tweeted x times</string>
+    <string name="info_followers">following x</string>
+    <string name="info_following">followers x</string>
+    
+    <!-- post -->
+    <string name="post_post">Post</string>
+    <string name="post_default_text">enter text...</string>
+
+    <!-- menu -->
+    <string name="refresh">Refresh</string>
+
+    <!-- item -->
+    <string name="item_user">User</string>
+    <string name="item_timestamp">0:00</string>
+    <string name="item_tweet">Tweet Text</string>
+    
+</resources>
