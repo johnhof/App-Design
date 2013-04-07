@@ -29,7 +29,7 @@ public class CommUtility {
 		return tweetList;
 	}
 	
-	public Tweet getSelected(){
+	public Tweet getSelectedTweet(){
 		return selectedTweet;
 	}
 	
@@ -47,16 +47,33 @@ public class CommUtility {
 		return true;
 	}
 	public boolean downloadHomeTweets(){
+		
 		//TODO: retrieve from twitter
+		
 		tweetList = new ArrayList<Tweet>();
 		for(int i = 0; i < 15; i++)tweetList.add(new Tweet(""+i, ""+i, ""+i));
 		return true;
 	}
 	
 	public boolean downloadMentionTweets(){
+		
 		//TODO: retrieve from twitter
+		
 		tweetList = new ArrayList<Tweet>();
 		for(int i = 5; i < 15; i++)tweetList.add(new Tweet(""+i, ""+i, ""+i));
 		return true;
+	}
+
+	public User getUserData(Tweet tweet) {
+		
+		// TODO: get user data and set it
+		
+		User user = new User();
+		user.setUsername(tweet.getUser());
+		user.setName("name");
+		user.setNumtweets(10);
+		user.setNumFollowing(5);
+		user.setNumFollowing(5);
+		return user;
 	}
 }
