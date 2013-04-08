@@ -68,13 +68,25 @@ public class HomeActivity extends TwitterActivity{
 			}
 		});
 		
+		//TODO: set onview
+		listView.setOnItemLongClickListener(new ListView.OnItemLongClickListener(){
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
+	    		Log.d("----test","test");
+	    		Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
+	    		commUtil.setSelectedTweet(arg2);
+	    		startActivity(intent);
+				return true;
+			}
+		});
+		
 		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 	        @Override
 	        public void onItemClick(AdapterView<?> a, View v, int i, long l) {
-	    		Log.d("----test","test");
-	    		Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
-	    		commUtil.setSelectedTweet(i);
-	    		startActivity(intent);
+	        	//TODO get url
+	        	//TODO launch browser
+	        	//TODO menu to select from multiple
 	        }
 	    });
 	}
