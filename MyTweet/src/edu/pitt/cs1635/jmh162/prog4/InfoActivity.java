@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class InfoActivity extends TwitterActivity{
-	private Tweet tweet;
+	private LocalTweet tweet;
 	private User user;
 	
 	@Override

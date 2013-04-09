@@ -6,5 +6,7 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="lib" path="/home/john/workspace/MyTweet/jars/json-me.jar"/>
 	<classpathentry kind="lib" path="/home/john/workspace/MyTweet/jars/twitter_api_me-1.6.jar"/>
+	<classpathentry kind="lib" path="libs/json-me.jar"/>
+	<classpathentry kind="lib" path="libs/twitter_api_me-1.6.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

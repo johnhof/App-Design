@@ -2,7 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_margin="10dp"
+    android:focusable="false"
+    android:orientation="vertical"
+    android:padding="10dp" >
 
     <TextView
         android:id="@+id/user"
@@ -10,11 +13,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:clickable="false"
+        android:focusable="false"
         android:focusableInTouchMode="false"
-		android:clickable="false"
-		android:focusable="false"
         android:text="@string/item_user"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#1C72FC" />
 
     <TextView
         android:id="@+id/timestamp"
@@ -23,12 +27,12 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/user"
         android:layout_marginBottom="15dp"
-        android:layout_marginTop="5dp"
+        android:clickable="false"
+        android:focusable="false"
         android:focusableInTouchMode="false"
-		android:clickable="false"
-		android:focusable="false"
         android:text="@string/item_timestamp"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textColor="#ADADAD"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
 
     <TextView
         android:id="@+id/tweet_text"
@@ -36,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/timestamp"
-        android:paddingBottom="10dp"
+        android:paddingBottom="5dp"
         android:focusableInTouchMode="false"
 		android:clickable="false"
 		android:focusable="false"

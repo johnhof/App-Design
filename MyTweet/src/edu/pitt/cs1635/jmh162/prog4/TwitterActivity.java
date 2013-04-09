@@ -70,12 +70,12 @@ public class TwitterActivity extends Activity{
 		return TwitterActivity.context;
 	}
 
-	public class TweetAdapter extends ArrayAdapter<Tweet> {
+	public class TweetAdapter extends ArrayAdapter<LocalTweet> {
 	
-		private ArrayList<Tweet> tweets;
-		Tweet tweet;
+		private ArrayList<LocalTweet> tweets;
+		LocalTweet tweet;
 	
-		public TweetAdapter(Context context, int textViewResourceId,	ArrayList<Tweet> tweets) {
+		public TweetAdapter(Context context, int textViewResourceId,	ArrayList<LocalTweet> tweets) {
 			super(context, textViewResourceId, tweets);
 			this.tweets = tweets;
 		}
@@ -96,8 +96,8 @@ public class TwitterActivity extends Activity{
 				TextView timeField = (TextView) view.findViewById(R.id.timestamp);
 				TextView textField = (TextView) view.findViewById(R.id.tweet_text);
 				
-				userField.setText(tweet.getUser());
-				timeField.setText(tweet.getTimestamp());
+				userField.setText(tweet.getUser().toString());
+				//timeField.setText(tweet.getTimestamp().toString());
 				textField.setText(tweet.getText());
 			}
 			return view;

@@ -18,7 +18,7 @@ public class MentionActivity extends TwitterActivity{
 
 	private Button refreshButton;
 	private TweetAdapter tweetAdapter;
-	private ArrayList<Tweet> tweetList;
+	private ArrayList<LocalTweet> tweetList;
 	private ListView listView;
 	
 	@Override
