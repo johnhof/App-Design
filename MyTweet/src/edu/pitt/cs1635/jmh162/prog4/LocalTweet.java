@@ -5,8 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import com.twitterapime.model.Entity;
+import com.twitterapime.model.MetadataSet;
 import com.twitterapime.rest.UserAccount;
 import com.twitterapime.search.Tweet;
+import com.twitterapime.search.TweetEntity;
 
 import android.content.Context;
 import android.text.format.DateFormat;
@@ -23,7 +25,7 @@ public class LocalTweet{
 	private String timestamp;
 	private String text;
 	private Tweet tweet; 
-	private Entity entity;
+	private TweetEntity entity;
 	
 	public LocalTweet(String newUserName, String newUser, String newTime, String newText){
 		userName = newUserName;
@@ -37,6 +39,13 @@ public class LocalTweet{
 		user = newTweet.getString("TWEET_AUTHOR_NAME");
 		text = newTweet.getString("TWEET_CONTENT");
 		timestamp = newTweet.getString("TWEET_PUBLISH_DATE");
+		entity = newTweet.getEntity();
+		if (entity != null) {
+			TweetEntity[] urls = entity.getURLs();
+			for (int i = 0; i < urls.length; i++) {
+				Log.d("PRINTING URLS",urls[i].getString(MetadataSet.TWEETENTITY_URL));
+			}
+		}
 		//int intTime = Integer.getInteger();
 		//timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(intTime * 1000L));
 	}
@@ -59,5 +68,5 @@ public class LocalTweet{
 	
 	public Entity getEntity(){
 		return entity;
-	}	
+	}
 }

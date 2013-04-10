@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import edu.pitt.cs1635.jmh162.prog4.TwitterActivity.TweetAdapter;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -61,14 +62,28 @@ public class MentionActivity extends TwitterActivity{
 				refreshList();
 			}
 		});
+
+		//TODO: set onview
+		listView.setOnItemLongClickListener(new ListView.OnItemLongClickListener(){
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
+	    		Intent intent = new Intent(MentionActivity.this, InfoActivity.class);
+	    		commUtil.setSelectedTweet(arg2);
+	    		startActivity(intent);
+				return true;
+			}
+		});
 		
 		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 	        @Override
 	        public void onItemClick(AdapterView<?> a, View v, int i, long l) {
-	    		Log.d("----test","test");
-	    		Intent intent = new Intent(MentionActivity.this, InfoActivity.class);
-	    		commUtil.setSelectedTweet(i);
-	    		startActivity(intent);
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+				
+				//startActivity(browserIntent);
+	        	
+				//TODO get url
+	        	//TODO menu to select from multiple
 	        }
 	    });
 	}
@@ -76,5 +91,7 @@ public class MentionActivity extends TwitterActivity{
 	public void refreshList(){
 		commUtil.downloadMentionTweets();
 		tweetList = commUtil.getTweetList();
+		Intent intent = new Intent(this, MentionActivity.class);
+		startActivity(intent);		
 	}
 }

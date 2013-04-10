@@ -23,10 +23,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="@dimen/activity_horizontal_margin"
         android:layout_centerInParent="true"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
         android:text="@string/info_username"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/name"
@@ -74,6 +75,6 @@
         android:layout_height="1dip"
         android:layout_below="@+id/name"
         android:layout_centerHorizontal="true"
-        android:background="#ffffff" />
+        android:background="#000000" />
     
 </RelativeLayout>

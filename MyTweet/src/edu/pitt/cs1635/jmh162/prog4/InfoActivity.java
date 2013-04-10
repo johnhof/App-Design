@@ -1,6 +1,7 @@
 package edu.pitt.cs1635.jmh162.prog4;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,17 +18,15 @@ public class InfoActivity extends TwitterActivity{
 		
 		tweet = commUtil.getSelectedTweet();
 		user = commUtil.getUserData(tweet);
-		
 
 		TextView usernameText = (TextView) findViewById(R.id.username);
 		TextView nameText = (TextView) findViewById(R.id.name);
 		TextView tweetNumText = (TextView) findViewById(R.id.tweet_number);
 		TextView followerText = (TextView) findViewById(R.id.followers);
 		TextView followsText = (TextView) findViewById(R.id.following);
-		
 
-		usernameText.setText(user.getUsername());
-		nameText.setText(user.getName());
+		usernameText.setText(tweet.getUserName());
+		nameText.setText(tweet.getUser());
 		tweetNumText.setText("Tweeted "+user.getNumtweets()+" times");
 		followerText.setText("Following "+user.getNumFollowing());
 		followsText.setText("Followers "+user.getNumFollowers());

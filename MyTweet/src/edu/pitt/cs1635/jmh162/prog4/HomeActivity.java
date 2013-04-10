@@ -1,6 +1,8 @@
 package edu.pitt.cs1635.jmh162.prog4;
 
 import java.util.ArrayList;
+
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -73,7 +75,6 @@ public class HomeActivity extends TwitterActivity{
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
-	    		Log.d("----test","test");
 	    		Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
 	    		commUtil.setSelectedTweet(arg2);
 	    		startActivity(intent);
@@ -84,6 +85,8 @@ public class HomeActivity extends TwitterActivity{
 		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 	        @Override
 	        public void onItemClick(AdapterView<?> a, View v, int i, long l) {
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+				startActivity(browserIntent);
 	        	//TODO get url
 	        	//TODO launch browser
 	        	//TODO menu to select from multiple
@@ -94,5 +97,7 @@ public class HomeActivity extends TwitterActivity{
 	public void refreshList(){
 		commUtil.downloadHomeTweets();
 		tweetList = commUtil.getTweetList();
+		Intent intent = new Intent(this, HomeActivity.class);
+		startActivity(intent);		
 	}
 }

@@ -6,10 +6,13 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import com.twitterapime.rest.Credential;
+import com.twitterapime.rest.Timeline;
+import com.twitterapime.rest.TweetER;
 import com.twitterapime.rest.UserAccountManager;
 import com.twitterapime.search.LimitExceededException;
 import com.twitterapime.search.QueryComposer;
 import com.twitterapime.search.SearchDevice;
+import com.twitterapime.search.SearchDeviceListener;
 import com.twitterapime.search.Tweet;
 import com.twitterapime.xauth.Token;
 
@@ -53,8 +56,8 @@ public class CommUtility {
 		selectedTweet = tweetList.get(index);
 	}
 	
-	private void login(){
-		token = new Token("332139818-FGBxr0ikpNlxUiUbsYLwK5RNoCgGqb9gemUXx0h","lrx5HCXoxBJv1CccvT2ksEUet1p5We9ONUb776lnU");
+	public void login(){
+		token = new Token("1332139818-LdpljQTDL1pICxv0bcTH8iKxImKSq6bQPqaK7zE","3ipPBXu0TBgsIOZcTCeacDCoQJzdPKI2dcJSrYn3Ss");
 		credential = new Credential("johnhofrichter", "QmzPlI0tyfHu1r0MHkBUsg", "wTObKWjEQqrti0ca38DQQtGVuBtXmTBmSFI3z8PLDgY", token);
 		accntMgr = UserAccountManager.getInstance(credential);
 		
@@ -79,54 +82,58 @@ public class CommUtility {
 	}
 	
 	public boolean post(String text){
+
+		login();
+		
 		if(!loggedIn){
 			Log.d("POST FAILED","NOT LOGGED IN");
+			return false;
 		}
+		Tweet tweet = new Tweet(text);
+		TweetER ter = TweetER.getInstance(accntMgr);
+		try {
+			tweet = ter.post(tweet);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (LimitExceededException e) {
+			e.printStackTrace();
+		}
+		
 		//TODO: post to twitter
 		Log.d("POST",text);
 		return true;
 	}
 	
 	public boolean downloadHomeTweets(){
-		
-		//TODO: retrieve from twitter
-		
-		tweetList = new ArrayList<LocalTweet>();
-		
-		//get your tweets
-		SearchDevice sDevice = SearchDevice.getInstance();
-		com.twitterapime.search.Query q = QueryComposer.from("johnhoffrichter");
-		Tweet[] myTweets = null;
-		try {
-			myTweets = sDevice.searchTweets(q);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (LimitExceededException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		//get your mentions
-		sDevice = SearchDevice.getInstance();
-		q = QueryComposer.containAny("@johnhoffrichter");
-		Tweet[] myMentions = null;
-		try {
-			myMentions = sDevice.searchTweets(q);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (LimitExceededException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	login();
 
-		for(int i=0; i<myTweets.length; i ++ ){
-			LocalTweet tweet = new LocalTweet(myTweets[i]);
-			tweetList.add(tweet);
+		if(!loggedIn){
+			Log.d("HOME FAILED","NOT LOGGED IN");
+			return false;
 		}
 		/*
-		for(int i = 0; i < 15; i++)tweetList.add(new Tweet(""+i, ""+i, ""+i));*/
+		CommThread thread = new CommThread();
+		thread.setThreadtype(CommThread.DL_HOME);
+		thread.execute();
+		*/
+		
+		Timeline timeline = Timeline.getInstance (accntMgr);
+		com.twitterapime.search.Query q = QueryComposer.count(10);
+
+		timeline.startGetHomeTweets(q, new SearchDeviceListener() {
+			@Override public void searchCompleted() {}
+			@Override public void searchFailed(Throwable arg0) {
+				Log.d("ADDED","ugh");
+				}
+			@Override
+			public void tweetFound(Tweet tweet) {
+				addToList(tweet);				
+				Log.d("ADDED",tweet.toString());
+			}
+		});
+		
+		Log.d("HOME TEST",tweetList.toString());
+		
 		return true;
 	}
 	
@@ -137,7 +144,7 @@ public class CommUtility {
 		tweetList = new ArrayList<LocalTweet>();
 		//get your tweets
 		SearchDevice sDevice = SearchDevice.getInstance();
-		com.twitterapime.search.Query q = QueryComposer.containAny("@johnhoffrichter");
+		com.twitterapime.search.Query q = QueryComposer.containAny("@Johnhoffrichter @johnhoffrichter @johnHoffrichter");
 		Tweet[] myMentions = null;
 		try {
 			myMentions = sDevice.searchTweets(q);
@@ -169,5 +176,21 @@ public class CommUtility {
 		user.setNumFollowing(5);
 		user.setNumFollowing(5);
 		return user;
+	}
+	
+	public boolean loggedIn(){
+		return loggedIn;
+	}
+	
+	public void clearList(){
+		tweetList = new ArrayList<LocalTweet>();
+	}
+	
+	public UserAccountManager getAccntMgr(){
+		return accntMgr;
+	}
+
+	public void addToList(Tweet tweet) {
+		tweetList.add(new LocalTweet(tweet));
 	}
 }
