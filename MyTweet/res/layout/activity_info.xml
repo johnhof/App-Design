@@ -40,32 +40,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/followers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/inclue_bar"
-        android:layout_below="@+id/tweet_number"
-        android:text="@string/info_followers"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/following"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tweet_number"
-        android:text="@string/info_following"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
         android:id="@+id/tweet_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/name"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:paddingBottom="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingBottom="5dp"
         android:text="@string/info_tweet_number"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -77,15 +58,6 @@
         android:layout_centerHorizontal="true"
         android:background="#000000" />
 
-    <View
-        android:id="@+id/separator2"
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_alignLeft="@+id/followers"
-        android:layout_below="@+id/followers"
-        android:layout_marginTop="32dp"
-        android:background="#000000" />
-
     <TextView
         android:id="@+id/tweet_text"
         android:layout_width="wrap_content"
@@ -93,9 +65,38 @@
         android:layout_above="@+id/inclue_bar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/separator2"
-        android:paddingTop="12dp"
+        android:layout_below="@+id/separator2"
+        android:layout_marginTop="20dp"
         android:text="@string/info_tweet_text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/followers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tweet_number"
+        android:paddingBottom="5dp"
+        android:text="@string/info_followers"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/following"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/followers"
+        android:paddingBottom="5dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/info_following"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <View
+        android:id="@+id/separator2"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@+id/tweet_text"
+        android:layout_below="@+id/following"
+        android:background="#000000" />
     
 </RelativeLayout>

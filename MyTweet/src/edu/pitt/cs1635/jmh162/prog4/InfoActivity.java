@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 public class InfoActivity extends TwitterActivity{
 	private LocalTweet tweet;
-	private User user;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +17,6 @@ public class InfoActivity extends TwitterActivity{
 		setupMenuBarButtons(this);
 		
 		tweet = commUtil.getSelectedTweet();
-		user = commUtil.getUserData(tweet);
 
 		TextView usernameText = (TextView) findViewById(R.id.username);
 		TextView nameText = (TextView) findViewById(R.id.name);
@@ -29,9 +27,9 @@ public class InfoActivity extends TwitterActivity{
 
 		usernameText.setText(tweet.getUserName());
 		nameText.setText(tweet.getUser());
-		tweetNumText.setText("Tweeted "+user.getNumtweets()+" times");
-		followerText.setText("Following "+user.getNumFollowing());
-		followsText.setText("Followers "+user.getNumFollowers());
+		tweetNumText.setText("Tweeted "+tweet.getNumtweets()+" times");
+		followerText.setText("Following "+tweet.getNumFollowing());
+		followsText.setText("Followers "+tweet.getNumFollowers());
 		tweetText.setText(tweet.getText());
 		
 		//SEAN THIS BETTER FUCKING WORK

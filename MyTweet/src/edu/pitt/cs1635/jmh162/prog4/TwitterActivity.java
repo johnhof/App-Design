@@ -98,7 +98,8 @@ public class TwitterActivity extends Activity{
 				TextView timeField = (TextView) view.findViewById(R.id.timestamp);
 				TextView textField = (TextView) view.findViewById(R.id.tweet_text);
 				
-				//timeField.setText(tweet.getTimestamp().toString());
+				userField.setText(tweet.getUser());
+				timeField.setText(tweet.getTimestamp());
 				textField.setText(tweet.getText());
 			}
 			return view;

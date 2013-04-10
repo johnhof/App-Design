@@ -24,6 +24,9 @@ public class LocalTweet{
 	private String user;
 	private String timestamp;
 	private String text;
+	private String followers;
+	private String following;
+	private String tweetCount;
 	private Tweet tweet; 
 	private TweetEntity entity;
 	
@@ -35,11 +38,21 @@ public class LocalTweet{
 	}
 	
 	public LocalTweet(Tweet newTweet) {
-		userName = newTweet.getString("TWEET_AUTHOR_USERNAME");
-		user = newTweet.getString("TWEET_AUTHOR_NAME");
-		text = newTweet.getString("TWEET_CONTENT");
-		timestamp = newTweet.getString("TWEET_PUBLISH_DATE");
-		entity = newTweet.getEntity();
+		tweet = newTweet;
+		UserAccount fullUser = tweet.getUserAccount();
+		userName = fullUser.getString("USERACCOUNT_USER_NAME");
+		user = fullUser.getString("USERACCOUNT_NAME");
+		text = tweet.getString("TWEET_CONTENT");
+		followers = fullUser.getString("USERACCOUNT_FOLLOWERS_COUNT");
+		following = fullUser.getString("USERACCOUNT_FRIENDS_COUNT");
+		tweetCount = fullUser.getString("USERACCOUNT_TWEETS_COUNT");
+		
+		
+		Date date = new Date(Long.parseLong(tweet.getString("TWEET_PUBLISH_DATE")));
+		SimpleDateFormat displayDate = new SimpleDateFormat("EEE, d, MMM");
+		timestamp = displayDate.format(date);
+		
+		entity = tweet.getEntity();
 		
 		if (entity != null) {
 			TweetEntity[] urls = entity.getURLs();
@@ -69,5 +82,17 @@ public class LocalTweet{
 	
 	public Entity getEntity(){
 		return entity;
+	}
+
+	public String getNumtweets() {
+		return tweetCount;
+	}
+
+	public String getNumFollowing() {
+		return following;
+	}
+
+	public String getNumFollowers() {
+		return followers;
 	}
 }

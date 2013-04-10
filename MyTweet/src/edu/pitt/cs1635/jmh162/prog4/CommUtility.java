@@ -77,49 +77,39 @@ public class CommUtility {
 		}
 	}
 	
-	public boolean post(String text){
+	public boolean post(final String text){
 
 		login();
-		
-		if(!loggedIn){
-			Log.d("POST FAILED","NOT LOGGED IN");
-			return false;
-		}
-		Tweet tweet = new Tweet(text);
-		TweetER ter = TweetER.getInstance(accntMgr);
-		try {
-			tweet = ter.post(tweet);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (LimitExceededException e) {
-			e.printStackTrace();
-		}
-		
-		//TODO: post to twitter
-		Log.d("POST",text);
+		Runnable herp = new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if(!loggedIn){
+					Log.d("POST FAILED","NOT LOGGED IN");
+				}
+				Tweet tweet = new Tweet(text);
+				TweetER ter = TweetER.getInstance(accntMgr);
+				try {
+					tweet = ter.post(tweet);
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (LimitExceededException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		};
+		new Thread(herp).start();
 		return true;
 	}
-	
-
-	public User getUserData(LocalTweet tweet) {
 		
-		// TODO: get user data and set it
-		
-		User user = new User();
-		user.setUsername(tweet.getUser().toString());
-		user.setName("name");
-		user.setNumtweets(10);
-		user.setNumFollowing(5);
-		user.setNumFollowing(5);
-		return user;
-	}
-	
 	public boolean loggedIn(){
 		return loggedIn;
 	}
 	
 	public void clearList(){
-		tweetList = new ArrayList<LocalTweet>();
+		tweetList.clear();
 	}
 	
 	public UserAccountManager getAccntMgr(){
