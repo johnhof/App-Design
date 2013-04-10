@@ -40,6 +40,7 @@ public class LocalTweet{
 		text = newTweet.getString("TWEET_CONTENT");
 		timestamp = newTweet.getString("TWEET_PUBLISH_DATE");
 		entity = newTweet.getEntity();
+		
 		if (entity != null) {
 			TweetEntity[] urls = entity.getURLs();
 			for (int i = 0; i < urls.length; i++) {

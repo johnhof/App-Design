@@ -39,7 +39,6 @@ public class CommUtility {
 		if (CommUtility.singleton == null) {
 			singleton = new CommUtility();
 			singleton.login();
-			singleton.load();
 		}
 		return singleton;
 	}
@@ -77,9 +76,6 @@ public class CommUtility {
 			Log.d("---LOGIN", "FAILURE");			
 		}
 	}
-	private void load(){
-		downloadHomeTweets();
-	}
 	
 	public boolean post(String text){
 
@@ -104,66 +100,6 @@ public class CommUtility {
 		return true;
 	}
 	
-	public boolean downloadHomeTweets(){
-    	login();
-
-		if(!loggedIn){
-			Log.d("HOME FAILED","NOT LOGGED IN");
-			return false;
-		}
-		/*
-		CommThread thread = new CommThread();
-		thread.setThreadtype(CommThread.DL_HOME);
-		thread.execute();
-		*/
-		
-		Timeline timeline = Timeline.getInstance (accntMgr);
-		com.twitterapime.search.Query q = QueryComposer.count(10);
-
-		timeline.startGetHomeTweets(q, new SearchDeviceListener() {
-			@Override public void searchCompleted() {}
-			@Override public void searchFailed(Throwable arg0) {
-				Log.d("ADDED","ugh");
-				}
-			@Override
-			public void tweetFound(Tweet tweet) {
-				addToList(tweet);				
-				Log.d("ADDED",tweet.toString());
-			}
-		});
-		
-		Log.d("HOME TEST",tweetList.toString());
-		
-		return true;
-	}
-	
-	public boolean downloadMentionTweets(){
-		
-		//TODO: retrieve from twitter
-		
-		tweetList = new ArrayList<LocalTweet>();
-		//get your tweets
-		SearchDevice sDevice = SearchDevice.getInstance();
-		com.twitterapime.search.Query q = QueryComposer.containAny("@Johnhoffrichter @johnhoffrichter @johnHoffrichter");
-		Tweet[] myMentions = null;
-		try {
-			myMentions = sDevice.searchTweets(q);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (LimitExceededException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-				
-		for(int i=0; i<myMentions.length; i ++ ){
-			LocalTweet tweet = new LocalTweet(myMentions[i]);
-			tweetList.add(tweet);
-		}
-		/*
-		for(int i = 5; i < 15; i++)tweetList.add(new LocalTweet(""+i, ""+i, ""+i));*/
-		return true;
-	}
 
 	public User getUserData(LocalTweet tweet) {
 		
@@ -190,7 +126,7 @@ public class CommUtility {
 		return accntMgr;
 	}
 
-	public void addToList(Tweet tweet) {
-		tweetList.add(new LocalTweet(tweet));
+	public void addToList(LocalTweet tweet) {
+		tweetList.add(tweet);
 	}
 }

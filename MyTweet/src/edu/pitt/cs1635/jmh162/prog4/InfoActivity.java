@@ -1,6 +1,7 @@
 package edu.pitt.cs1635.jmh162.prog4;
 
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.Button;
@@ -24,12 +25,17 @@ public class InfoActivity extends TwitterActivity{
 		TextView tweetNumText = (TextView) findViewById(R.id.tweet_number);
 		TextView followerText = (TextView) findViewById(R.id.followers);
 		TextView followsText = (TextView) findViewById(R.id.following);
+		TextView tweetText = (TextView) findViewById(R.id.tweet_text);
 
 		usernameText.setText(tweet.getUserName());
 		nameText.setText(tweet.getUser());
 		tweetNumText.setText("Tweeted "+user.getNumtweets()+" times");
 		followerText.setText("Following "+user.getNumFollowing());
 		followsText.setText("Followers "+user.getNumFollowers());
+		tweetText.setText(tweet.getText());
+		
+		//SEAN THIS BETTER FUCKING WORK
+		Linkify.addLinks(tweetText, Linkify.ALL);
 		
 	}
 

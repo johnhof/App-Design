@@ -24,25 +24,26 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080012;
+        public static final int action_settings=0x7f080013;
         public static final int followers=0x7f080005;
         public static final int following=0x7f080007;
-        public static final int home=0x7f080010;
+        public static final int home=0x7f080011;
         public static final int inclue_bar=0x7f080000;
         public static final int list_home=0x7f080001;
-        public static final int mentions=0x7f080011;
+        public static final int mentions=0x7f080012;
         public static final int name=0x7f080004;
-        public static final int post=0x7f08000f;
-        public static final int post_button=0x7f08000a;
+        public static final int post=0x7f080010;
+        public static final int post_button=0x7f08000c;
         public static final int refresh_home=0x7f080002;
+        public static final int separator2=0x7f080009;
         public static final int separator_1=0x7f080008;
-        public static final int text_entry=0x7f08000b;
-        public static final int timestamp=0x7f08000d;
+        public static final int text_entry=0x7f08000d;
+        public static final int timestamp=0x7f08000f;
         public static final int tweet_number=0x7f080006;
-        public static final int tweet_text=0x7f08000e;
-        public static final int user=0x7f08000c;
+        public static final int tweet_text=0x7f08000a;
+        public static final int user=0x7f08000e;
         public static final int username=0x7f080003;
-        public static final int view1=0x7f080009;
+        public static final int view1=0x7f08000b;
     }
     public static final class layout {
         public static final int activity_home=0x7f030000;
@@ -62,26 +63,27 @@ public final class R {
         public static final int info_following=0x7f050009;
         public static final int info_name=0x7f050006;
         public static final int info_tweet_number=0x7f050007;
+        public static final int info_tweet_text=0x7f05000a;
         /**  info 
          */
         public static final int info_username=0x7f050005;
-        public static final int item_timestamp=0x7f05000e;
-        public static final int item_tweet=0x7f05000f;
+        public static final int item_timestamp=0x7f05000f;
+        public static final int item_tweet=0x7f050010;
         /**  item 
          */
-        public static final int item_user=0x7f05000d;
+        public static final int item_user=0x7f05000e;
         public static final int menu_Post=0x7f050004;
         /**  menu 
          */
         public static final int menu_home=0x7f050002;
         public static final int menu_mentions=0x7f050003;
-        public static final int post_default_text=0x7f05000b;
+        public static final int post_default_text=0x7f05000c;
         /**  post 
          */
-        public static final int post_post=0x7f05000a;
+        public static final int post_post=0x7f05000b;
         /**  menu 
          */
-        public static final int refresh=0x7f05000c;
+        public static final int refresh=0x7f05000d;
     }
     public static final class style {
         /** 

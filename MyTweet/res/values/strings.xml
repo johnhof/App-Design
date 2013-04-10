@@ -15,6 +15,7 @@
     <string name="info_tweet_number">tweeted x times</string>
     <string name="info_followers">following x</string>
     <string name="info_following">followers x</string>
+    <string name="info_tweet_text">sample text</string>
     
     <!-- post -->
     <string name="post_post">Post</string>

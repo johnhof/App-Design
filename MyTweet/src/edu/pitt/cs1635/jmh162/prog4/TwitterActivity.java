@@ -74,10 +74,11 @@ public class TwitterActivity extends Activity{
 	
 		private ArrayList<LocalTweet> tweets;
 		LocalTweet tweet;
+		CommUtility commUtil = CommUtility.getInstance();
 	
 		public TweetAdapter(Context context, int textViewResourceId,	ArrayList<LocalTweet> tweets) {
 			super(context, textViewResourceId, tweets);
-			this.tweets = tweets;
+			this.tweets = commUtil.getTweetList();
 		}
 	
 		@Override
@@ -89,14 +90,14 @@ public class TwitterActivity extends Activity{
 				view = inflator.inflate(R.layout.list_item, null);
 			}
 	
-			tweet = tweets.get(position);
+			//tweet = tweets.get(position);
+			tweet = commUtil.getTweetList().get(position);
 			if (tweet != null) {
 				// button creation
 				TextView userField = (TextView) view.findViewById(R.id.user);
 				TextView timeField = (TextView) view.findViewById(R.id.timestamp);
 				TextView textField = (TextView) view.findViewById(R.id.tweet_text);
 				
-				userField.setText(tweet.getUser().toString());
 				//timeField.setText(tweet.getTimestamp().toString());
 				textField.setText(tweet.getText());
 			}

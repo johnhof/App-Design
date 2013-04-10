@@ -2,10 +2,16 @@ package edu.pitt.cs1635.jmh162.prog4;
 
 import java.util.ArrayList;
 
+import com.twitterapime.rest.Timeline;
+import com.twitterapime.search.QueryComposer;
+import com.twitterapime.search.SearchDeviceListener;
+import com.twitterapime.search.Tweet;
+
 import edu.pitt.cs1635.jmh162.prog4.TwitterActivity.TweetAdapter;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -19,7 +25,6 @@ public class MentionActivity extends TwitterActivity{
 
 	private Button refreshButton;
 	private TweetAdapter tweetAdapter;
-	private ArrayList<LocalTweet> tweetList;
 	private ListView listView;
 	
 	@Override
@@ -29,10 +34,10 @@ public class MentionActivity extends TwitterActivity{
 		setupMenuBarButtons(this);
 		mentionsButton.setBackgroundColor(0xFF005CFF);
 
-		commUtil.downloadMentionTweets();
-		tweetList = commUtil.getTweetList();
+		commUtil.clearList();
+		downloadMentionTweets();
 
-		tweetAdapter = new TweetAdapter(this, R.layout.list_item, tweetList);
+		tweetAdapter = new TweetAdapter(this, R.layout.list_item, commUtil.getTweetList());
 		listView = (ListView) findViewById(R.id.list_home);
 		listView.setAdapter(tweetAdapter);
 		
@@ -54,7 +59,37 @@ public class MentionActivity extends TwitterActivity{
 	private void initializeViewItems() {
 		refreshButton = (Button) findViewById(R.id.refresh_home);
 	}
+	
+	private boolean downloadMentionTweets(){
+		commUtil.login();
 
+		if(!commUtil.loggedIn()){
+			Log.d("HOME FAILED","NOT LOGGED IN");
+			return false;
+		}
+		
+		Timeline timeline = Timeline.getInstance (commUtil.getAccntMgr());
+		com.twitterapime.search.Query q = QueryComposer.count(20);
+
+		timeline.startGetMentions(q, new SearchDeviceListener() {
+			@Override public void searchCompleted() {}
+			@Override public void searchFailed(Throwable arg0) {}
+			@Override
+			public void tweetFound(final Tweet tweet) {
+				LocalTweet local = new LocalTweet(tweet);
+				commUtil.addToList(local);	
+
+				MentionActivity.this.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						if(tweetAdapter!=null)tweetAdapter.notifyDataSetChanged();
+					}
+				});
+			}
+		});
+		return true;
+	}
+	
 	private void initializeButtonListeners() {
 		refreshButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -62,36 +97,19 @@ public class MentionActivity extends TwitterActivity{
 				refreshList();
 			}
 		});
-
-		//TODO: set onview
-		listView.setOnItemLongClickListener(new ListView.OnItemLongClickListener(){
-
-			@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
-	    		Intent intent = new Intent(MentionActivity.this, InfoActivity.class);
-	    		commUtil.setSelectedTweet(arg2);
-	    		startActivity(intent);
-				return true;
-			}
-		});
 		
 		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 	        @Override
 	        public void onItemClick(AdapterView<?> a, View v, int i, long l) {
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
-				
-				//startActivity(browserIntent);
-	        	
-				//TODO get url
-	        	//TODO menu to select from multiple
+	    		Intent intent = new Intent(MentionActivity.this, InfoActivity.class);
+	    		commUtil.setSelectedTweet(i);
+	    		startActivity(intent);
 	        }
 	    });
 	}
 	
 	public void refreshList(){
-		commUtil.downloadMentionTweets();
-		tweetList = commUtil.getTweetList();
-		Intent intent = new Intent(this, MentionActivity.class);
-		startActivity(intent);		
+		commUtil.clearList();
+		downloadMentionTweets();
 	}
 }

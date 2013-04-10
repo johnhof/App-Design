@@ -2,6 +2,11 @@ package edu.pitt.cs1635.jmh162.prog4;
 
 import java.util.ArrayList;
 
+import com.twitterapime.rest.Timeline;
+import com.twitterapime.search.QueryComposer;
+import com.twitterapime.search.SearchDeviceListener;
+import com.twitterapime.search.Tweet;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
@@ -35,16 +40,19 @@ public class HomeActivity extends TwitterActivity{
 		setContentView(R.layout.activity_home);
 		setupMenuBarButtons(this);
 		homeButton.setBackgroundColor(0xFF005CFF);
-		
-		commUtil.downloadHomeTweets();
-		tweetList = commUtil.getTweetList();
 
-		tweetAdapter = new TweetAdapter(this, R.layout.list_item, tweetList);
+		commUtil.clearList();
+		downloadHomeTweets();
+		tweetList = commUtil.getTweetList();
+		
+		tweetAdapter = new TweetAdapter(this, R.layout.list_item, commUtil.getTweetList());
 		listView = (ListView) findViewById(R.id.list_home);
 		listView.setAdapter(tweetAdapter);
+
 		
 		initializeViewItems();
 		initializeButtonListeners();
+		
 	}
 
 	@Override
@@ -61,6 +69,36 @@ public class HomeActivity extends TwitterActivity{
 	private void initializeViewItems() {
 		refreshButton = (Button) findViewById(R.id.refresh_home);
 	}
+	
+	private boolean downloadHomeTweets(){
+		commUtil.login();
+
+		if(!commUtil.loggedIn()){
+			Log.d("HOME FAILED","NOT LOGGED IN");
+			return false;
+		}
+		
+		Timeline timeline = Timeline.getInstance (commUtil.getAccntMgr());
+		com.twitterapime.search.Query q = QueryComposer.count(20);
+
+		timeline.startGetHomeTweets(q, new SearchDeviceListener() {
+			@Override public void searchCompleted() {}
+			@Override public void searchFailed(Throwable arg0) {}
+			@Override
+			public void tweetFound(final Tweet tweet) {
+				LocalTweet local = new LocalTweet(tweet);
+				commUtil.addToList(local);	
+
+				HomeActivity.this.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						if(tweetAdapter!=null)tweetAdapter.notifyDataSetChanged();
+					}
+				});
+			}
+		});
+		return true;
+	}
 
 	private void initializeButtonListeners() {
 		refreshButton.setOnClickListener(new OnClickListener() {
@@ -70,34 +108,18 @@ public class HomeActivity extends TwitterActivity{
 			}
 		});
 		
-		//TODO: set onview
-		listView.setOnItemLongClickListener(new ListView.OnItemLongClickListener(){
-
-			@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int arg2, long arg3) {
-	    		Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
-	    		commUtil.setSelectedTweet(arg2);
-	    		startActivity(intent);
-				return true;
-			}
-		});
-		
 		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 	        @Override
 	        public void onItemClick(AdapterView<?> a, View v, int i, long l) {
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
-				startActivity(browserIntent);
-	        	//TODO get url
-	        	//TODO launch browser
-	        	//TODO menu to select from multiple
+	    		Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
+	    		commUtil.setSelectedTweet(i);
+	    		startActivity(intent);
 	        }
 	    });
 	}
 	
 	public void refreshList(){
-		commUtil.downloadHomeTweets();
-		tweetList = commUtil.getTweetList();
-		Intent intent = new Intent(this, HomeActivity.class);
-		startActivity(intent);		
+		commUtil.clearList();
+		downloadHomeTweets();
 	}
 }
